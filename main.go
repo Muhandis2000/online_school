@@ -9,12 +9,12 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/Muhandis2000/online-school/internal/config"
-	"github.com/Muhandis2000/online-school/internal/controllers"
-	"github.com/Muhandis2000/online-school/internal/db"
-	"github.com/Muhandis2000/online-school/internal/middleware"
-	"github.com/Muhandis2000/online-school/internal/repositories"
-	"github.com/Muhandis2000/online-school/internal/services"
+	"online-school/internal/config"
+	"online-school/internal/controllers"
+	"online-school/internal/db"
+	"online-school/internal/middleware"
+	"online-school/internal/repositories"
+	"online-school/internal/services"
 	"github.com/gin-gonic/gin"
 )
 

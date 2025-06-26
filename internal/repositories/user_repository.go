@@ -6,7 +6,7 @@ import (
 	"errors"
 	"time"
 
-	"github.com/Muhandis2000/online-school/internal/models"
+	"online-school/internal/models"
 	"github.com/jmoiron/sqlx"
 )
 

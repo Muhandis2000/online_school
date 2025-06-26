@@ -3,8 +3,9 @@ package controllers
 import (
 	"net/http"
 
-	"github.com/Muhandis2000/online-school/internal/models"
-	"github.com/Muhandis2000/online-school/internal/services"
+	"online-school/internal/models"
+	"online-school/internal/services"
+
 	"github.com/gin-gonic/gin"
 )
 

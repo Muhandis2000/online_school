@@ -4,9 +4,10 @@ import (
 	"context"
 	"errors"
 
-	"github.com/Muhandis2000/online-school/internal/models"
-	"github.com/Muhandis2000/online-school/internal/repositories"
-	"github.com/Muhandis2000/online-school/internal/utils"
+	"online-school/internal/models"
+	"online-school/internal/repositories"
+	"online-school/internal/utils"
+
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -15,9 +16,9 @@ type AuthService struct {
 	jwtSecret string
 }
 
-func NewAuthService(repo *repositories.Repository, jwtSecret string) *AuthService {
+func NewAuthService(userRepo *repositories.UserRepository, jwtSecret string) *AuthService {
 	return &AuthService{
-		userRepo:  repo.User,
+		userRepo:  userRepo,
 		jwtSecret: jwtSecret,
 	}
 }

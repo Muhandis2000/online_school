@@ -3,7 +3,8 @@ package db
 import (
 	"fmt"
 
-	"github.com/Muhandis2000/online-school/internal/config"
+	"online-school/internal/config"
+
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
 )
