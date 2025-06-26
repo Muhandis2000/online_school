@@ -35,3 +35,30 @@ func JWTAuthMiddleware(secret string) gin.HandlerFunc {
 		c.Next()
 	}
 }
+
+// RoleMiddleware проверяет, имеет ли пользователь необходимую роль
+func RoleMiddleware(roles ...string) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		userRole, exists := c.Get("userRole")
+		if !exists {
+			c.AbortWithStatusJSON(http.StatusForbidden, gin.H{"error": "Role information not found"})
+			return
+		}
+
+		// Проверяем, есть ли роль пользователя в списке разрешенных
+		hasAccess := false
+		for _, role := range roles {
+			if role == userRole {
+				hasAccess = true
+				break
+			}
+		}
+
+		if !hasAccess {
+			c.AbortWithStatusJSON(http.StatusForbidden, gin.H{"error": "Insufficient permissions"})
+			return
+		}
+
+		c.Next()
+	}
+}
