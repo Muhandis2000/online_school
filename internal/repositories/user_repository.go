@@ -7,8 +7,21 @@ import (
 	"time"
 
 	"online-school/internal/models"
+
 	"github.com/jmoiron/sqlx"
 )
+
+type UserRepositoryInterface interface {
+	CreateUser(user *models.User) error
+	GetUserByEmail(email string) (*models.User, error)
+	GetUserByID(id int) (*models.User, error)
+}
+
+type TeacherRepositoryInterface interface {
+	CreateTeacher(teacher *models.Teacher) error
+	ApproveTeacher(id int) error
+	GetTeachers() ([]models.Teacher, error)
+}
 
 type UserRepository struct {
 	db *sqlx.DB
@@ -42,4 +55,24 @@ func (r *UserRepository) GetUserByEmail(ctx context.Context, email string) (*mod
 		return nil, errors.New("пользователь не найден")
 	}
 	return user, err
+}
+func (r *UserRepository) GetAll(ctx context.Context) ([]models.User, error) {
+	var users []models.User
+	query := `SELECT id, username, email, password, role, created_at, updated_at FROM users`
+	if err := r.db.SelectContext(ctx, &users, query); err != nil {
+		return nil, err
+	}
+	return users, nil
+}
+
+func (r *UserRepository) GetByID(ctx context.Context, id int) (*models.User, error) {
+	var user models.User
+	query := `SELECT id, username, email, password, role, created_at, updated_at FROM users WHERE id = $1`
+	if err := r.db.GetContext(ctx, &user, query, id); err != nil {
+		if errors.Is(err, sql.ErrNoRows) {
+			return nil, errors.New("пользователь не найден")
+		}
+		return nil, err
+	}
+	return &user, nil
 }

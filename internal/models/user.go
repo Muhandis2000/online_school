@@ -10,3 +10,7 @@ type User struct {
 	Role      string    `json:"role" example:"student"`
 	CreatedAt time.Time `json:"created_at" example:"2023-01-01T12:00:00Z"`
 }
+type LoginRequest struct {
+	Email    string `json:"email" binding:"required,email"`
+	Password string `json:"password" binding:"required"`
+}
