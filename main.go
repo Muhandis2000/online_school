@@ -121,10 +121,6 @@ func main() {
 		}
 		c.Next()
 	})
-	// Создаем роутер Gin
-	r := gin.Default()
-	// Запускаем сервер на порту 8080
-	r.Run(":8080")
 	// Настройка логирования
 	router.Use(gin.Logger())
 	router.Use(gin.Recovery())

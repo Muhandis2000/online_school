@@ -62,3 +62,28 @@ func RoleMiddleware(roles ...string) gin.HandlerFunc {
 		c.Next()
 	}
 }
+
+// AdminMiddleware проверяет, является ли пользователь администратором.
+func AdminMiddleware() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		// Пример: предполагается, что роль пользователя хранится в контексте после аутентификации
+		role, exists := c.Get("role")
+		if !exists || role != "admin" {
+			c.AbortWithStatusJSON(http.StatusForbidden, gin.H{"error": "Access denied: admin only"})
+			return
+		}
+		c.Next()
+	}
+}
+func AuthMiddleware() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		// Example: Check for Authorization header (replace with real logic)
+		authHeader := c.GetHeader("Authorization")
+		if authHeader == "" {
+			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
+			return
+		}
+		// Continue to next handler if authorized
+		c.Next()
+	}
+}
