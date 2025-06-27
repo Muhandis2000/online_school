@@ -27,3 +27,7 @@
 ## Проверка в Свагер
 
 [Открыть Swagger UI](http://localhost:8080/swagger/index.html)
+
+## находит проект
+
+[https://github.com/Muhandis2000/online_school.git]
